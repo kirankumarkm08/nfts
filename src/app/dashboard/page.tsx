@@ -13,7 +13,7 @@ import { fetchNFTs, type NFT } from "@/lib/nft-service";
 import fetchCardanoNFTs from "@/services/cardano-service";
 import NFTCard from "@/components/nft-card";
 import WalletInfo from "@/components/Wallet-Info";
-import { base, optimism } from "wagmi/chains";
+import { base } from "wagmi/chains";
 import { useCardano } from "@/provider/CardenoProvider";
 import { CardanoWalletSelector } from "@/components/Cardano-wallet-selector";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

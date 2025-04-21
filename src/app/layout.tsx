@@ -3,7 +3,7 @@ import "./globals.css";
 import { WalletProvider } from "@/provider/WalletProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { CardanoProvider } from "@/provider/CardenoProvider";
+// import { CardanoProvider } from "@/provider/CardenoProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
