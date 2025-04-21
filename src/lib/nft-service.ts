@@ -31,6 +31,7 @@ export async function fetchNFTs(address: string): Promise<NFT[]> {
     }
 
     const response = await fetch(`/api/nft/base?address=${address}`);
+    console.log(response);
 
     if (!response.ok) {
       throw new Error(
