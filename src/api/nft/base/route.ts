@@ -1,5 +1,3 @@
-import { type NextRequest, NextResponse } from "next/server";
-
 // This is your API route that fetches data from OpenSea and returns it
 export async function GET(request: NextRequest) {
   try {
@@ -18,13 +16,26 @@ export async function GET(request: NextRequest) {
       }
     );
 
-    // Process data and return as JSON
+    // Process data
     const data = await response.json();
-    const nfts = data.nfts.map(/* mapping logic */);
 
-    // This is the data structure returned to your client
+    const nfts = data.nfts.map((nft: any) => ({
+      id: nft.identifier || nft.id || "",
+      name: nft.name || `NFT #${nft.identifier || nft.id || "Unknown"}`,
+      description: nft.description || "",
+      image: nft.image_url || nft.image || "",
+      collection: nft.collection?.name || "",
+      contract: nft.contract || nft.contract_address || "",
+      link: nft.permalink || "",
+    }));
+
+    // Log the mapped NFT list
+    console.log("Fetched NFTs:", nfts);
+
+    // Return JSON response
     return NextResponse.json({ nfts });
   } catch (error) {
+    console.error("Error in GET /api/nft/base:", error);
     return NextResponse.json(
       { error: `Failed to fetch NFTs, ${error}` },
       { status: 500 }

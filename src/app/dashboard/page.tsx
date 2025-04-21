@@ -120,7 +120,7 @@ export default function Dashboard() {
   //   activeTab === "base" ? isEvmConnected : isCardanoConnected;
 
   return (
-    <main className="container mx-auto py-6 px-4 max-w-6xl">
+    <main className="container mx-auto py-20 px-4 max-w-6xl">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">NFT Dashboard</h1>
         <div className="flex items-center">
