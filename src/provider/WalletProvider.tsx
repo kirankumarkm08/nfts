@@ -11,30 +11,32 @@ import { base, optimism } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 
-// Configure chains
-// const chains = [base, mainnet, optimism, arbitrum, polygon, bsc];
+// ✅ Ensure projectId is defined
+const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 
-// Set up connectors
+if (!projectId) {
+  throw new Error(
+    "WalletConnect `projectId` is missing. Please define NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID in your .env file."
+  );
+}
+
+// Define chains as a properly typed constant array
+const wagmiChains = [base, optimism] as const;
+
 const { connectors } = getDefaultWallets({
   appName: "NFT Gallery",
-  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "",
+  projectId,
 });
 
-// Create config
 const config = createConfig({
-  chains: [base, optimism],
+  chains: wagmiChains,
   transports: {
     [base.id]: http("https://mainnet.base.org"),
-    // [mainnet.id]: http("https://eth.llamarpc.com"),
     [optimism.id]: http("https://mainnet.optimism.io"),
-    // [arbitrum.id]: http("https://arb1.arbitrum.io/rpc"),
-    // [polygon.id]: http("https://polygon-rpc.com"),
-    // [bsc.id]: http("https://bsc-dataseed.binance.org"),
   },
   connectors,
 });
 
-// Create query client
 const queryClient = new QueryClient();
 
 export function WalletProvider({ children }: { children: ReactNode }) {

@@ -27,28 +27,30 @@ export default function Navbar() {
 
   return (
     <nav className="flex justify-between px-4 sm:px-8 md:px-20 py-4 fixed w-full bg-white z-50 border-b">
-      <Link href="/" className="font-bold">
-        Rare evo 2025
-      </Link>
+      <div className="flex gap-10">
+        <Link href="/" className="font-bold">
+          Rare evo 2025
+        </Link>
 
-      <div className="md:flex gap-5 hidden">
-        {NavbarData.map((item) => (
-          <Link
-            href={item.link}
-            key={item.label}
-            className="hover:text-gray-600 transition-colors"
-          >
-            {item.label}
-          </Link>
-        ))}
+        <div className="md:flex gap-5 hidden">
+          {NavbarData.map((item) => (
+            <Link
+              href={item.link}
+              key={item.label}
+              className="hover:text-gray-600 transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className="hidden md:flex items-center">
+      <div className="hidden lg:flex items-center">
         <ConnectButton />
         <CardanoWalletSelector />
       </div>
 
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <MobileMenu />
       </div>
     </nav>
